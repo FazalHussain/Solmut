@@ -1,0 +1,28 @@
+import React from 'react';
+import Navbar from './components/Navbar';
+import Hero from './components/Hero';
+import About from './components/About';
+import Tokenomics from './components/Tokenomics';
+import Presale from './components/Presale';
+import Staking from './components/Staking';
+import FAQ from './components/FAQ';
+import Footer from './components/Footer';
+
+function App() {
+  return (
+    <div className="min-h-screen bg-gray-900">
+      <Navbar />
+      <main>
+        <Hero />
+        <About />
+        <Tokenomics />
+        <Presale />
+        <Staking />
+        <FAQ />
+        <Footer />
+      </main>
+    </div>
+  );
+}
+
+export default App;
