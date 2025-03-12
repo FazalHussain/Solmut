@@ -1,16 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Wallet, Timer, ArrowRight } from 'lucide-react';
 import Countdown from 'react-countdown';
-import WalletConnector from './WalletConnector';
+
+import { useConnectWallet } from "../hook/connectWallet"; // Import the hook
+
 
 const Presale = () => {
   const [amount, setAmount] = useState<string>('1000');
   const presaleEndDate = new Date('2025-06-01T00:00:00');
   const tokenPrice = 0.005;
 
+  // Use the custom hook for wallet logic
+  const { connect, disconnect, connected, publicKey } = useConnectWallet();
+
   const calculateTokens = (usdAmount: string): number => {
     return parseFloat(usdAmount) / tokenPrice;
   };
+
+  useEffect(() => {
+    if (connected && publicKey) {
+      console.log("Connected Wallet Address:", publicKey.toBase58());
+    }
+  });
 
   const renderer = ({ days, hours, minutes, seconds, completed }: any) => {
     if (completed) {
@@ -94,9 +105,12 @@ const Presale = () => {
                   {calculateTokens(amount).toLocaleString()} $SLMT
                 </span>
               </div>
-              <button className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 text-white font-bold py-3 px-6 rounded-lg flex items-center justify-center space-x-2 transform hover:scale-105 transition-all duration-200 neon-border">
+              
+              <button 
+              className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 text-white font-bold py-3 px-6 rounded-lg flex items-center justify-center space-x-2 transform hover:scale-105 transition-all duration-200 neon-border"
+              onClick={connected ? disconnect : connect}>
                 <Wallet size={20} />
-                <span>Connect Wallet to Buy</span>
+                <span>{connected ? "Disconnect Wallet" : "Connect Wallet to Buy"}</span>
               </button>
             </div>
           </div>
