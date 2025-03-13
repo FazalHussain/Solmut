@@ -8,6 +8,7 @@ Welcome to Solmut ($SLMT) – a high-speed, community-driven meme token built on
     ✅ Wallet Integration – Connect Phantom & other Solana wallets
     ✅ Live Countdown Timer – Track the presale in real-time
     ✅ Secure Transactions – Fast and low-cost transactions on Solana
+    
 
 # 📂 Project Structure
 
@@ -40,6 +41,10 @@ Open http://localhost:5174 in your browser.
 
     npm run build
     npm run start
+
+# 🚀 UI
+
+![solmut](https://i.imgur.com/u6X3XWd.png)
 
 # 📜 License
 
