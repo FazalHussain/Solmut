@@ -22,6 +22,7 @@ import Footer from './components/Footer';
 
   // Default styles that can be overridden by your app
   import '@solana/wallet-adapter-react-ui/styles.css';
+import Whitepaper from './components/Whitepaper';
 
   function App() {
 
@@ -53,6 +54,7 @@ import Footer from './components/Footer';
                 <Tokenomics />
                 <Presale />
                 <Staking />
+                <Whitepaper />
                 <FAQ />
                 <Footer />
               </main>

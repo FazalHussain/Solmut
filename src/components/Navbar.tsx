@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import { Menu, X, MessageSquare, Twitter } from 'lucide-react';
 
+import { useConnectWallet } from "../hook/connectWallet"; // Import the hook
+
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const menuItems = ['Home', 'About', 'Tokenomics', 'Presale', 'Staking', 'FAQ', 'Whitepaper'];
+  const { connect, disconnect, connected, publicKey } = useConnectWallet();
 
   return (
     <nav className="fixed w-full bg-gray-900/90 backdrop-blur-sm z-50 border-b border-purple-500/20">
@@ -26,6 +29,7 @@ const Navbar = () => {
                   {item}
                 </a>
               ))}
+            
               <div className="flex space-x-2 ml-4">
                 <a href="https://t.me/solmutOfficial" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-purple-400 transition-colors duration-200">
                   <MessageSquare size={20} />
@@ -34,6 +38,12 @@ const Navbar = () => {
                   <Twitter size={20} />
                 </a>
               </div>
+              <button
+                onClick={connected ? disconnect : connect}
+                className="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-lg"
+              >
+                {connected ? `Disconnect (${publicKey?.toBase58().slice(0, 4)}...${publicKey?.toBase58().slice(-4)})` : "Connect Wallet"}
+              </button>
             </div>
           </div>
 
@@ -63,6 +73,12 @@ const Navbar = () => {
                 {item}
               </a>
             ))}
+            <button
+              onClick={connected ? disconnect : connect}
+              className="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-lg"
+            >
+              {connected ? `Disconnect (${publicKey?.toBase58().slice(0, 4)}...${publicKey?.toBase58().slice(-4)})` : "Connect Wallet"}
+            </button>
             <div className="flex space-x-4 px-3 py-2">
               <a href="https://t.me/solmutOfficial" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-purple-400 transition-colors duration-200">
                 <MessageSquare size={20} />
