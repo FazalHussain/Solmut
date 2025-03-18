@@ -1,11 +1,9 @@
-import React, { FC, useMemo } from 'react';
+import React, { FC, useMemo, useEffect, useState, } from 'react';
 import { ConnectionProvider, WalletProvider } from '@solana/wallet-adapter-react';
 import { WalletAdapterNetwork } from '@solana/wallet-adapter-base';
-import { UnsafeBurnerWalletAdapter, PhantomWalletAdapter } from '@solana/wallet-adapter-wallets';
+import { UnsafeBurnerWalletAdapter, PhantomWalletAdapter, SolflareWalletAdapter } from '@solana/wallet-adapter-wallets';
 import {
   WalletModalProvider,
-  WalletDisconnectButton,
-  WalletMultiButton
 } from '@solana/wallet-adapter-react-ui';
 import { clusterApiUrl } from '@solana/web3.js';
 
@@ -18,53 +16,56 @@ import Presale from './components/Presale';
 import Staking from './components/Staking';
 import FAQ from './components/FAQ';
 import Footer from './components/Footer';
-
-
-  // Default styles that can be overridden by your app
-  import '@solana/wallet-adapter-react-ui/styles.css';
 import Whitepaper from './components/Whitepaper';
 
-  function App() {
-
-    // The network can be set to 'devnet', 'testnet', or 'mainnet-beta'.
-  const network = WalletAdapterNetwork.Devnet;
-
-  // You can also provide a custom RPC endpoint.
+const App = () => {
+  const [isPhantomAvailable, setIsPhantomAvailable] = useState(false); // Track Phantom availability
+  const network = WalletAdapterNetwork.Devnet; // or "mainnet", "testnet"
   const endpoint = useMemo(() => clusterApiUrl(network), [network]);
 
-  const wallets = useMemo(
-    () => [
+  // Set up the wallets list, adding Phantom only if it's available
+  const wallets = useMemo(() => {
+    const availableWallets: any[] = [
+      new SolflareWalletAdapter(),
       new UnsafeBurnerWalletAdapter(),
-      new PhantomWalletAdapter()
-    ],
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [network]
+    ];
+
+    // Add Phantom if available
+    if (isPhantomAvailable) {
+      availableWallets.unshift(new PhantomWalletAdapter());
+    }
+
+    return availableWallets as any; // Force the type to any to bypass the type error
+  }, [isPhantomAvailable]);
+
+  // Check for Phantom wallet availability
+  useEffect(() => {
+    if (window.solana && window.solana.isPhantom) {
+      setIsPhantomAvailable(true); // Phantom is available
+    }
+  }, []);
+
+  return (
+    <ConnectionProvider endpoint={endpoint}>
+      <WalletProvider wallets={wallets} autoConnect>
+        <WalletModalProvider>
+          <div className="min-h-screen bg-gray-900">
+            <Navbar />
+            <main>
+              <Hero />
+              <About />
+              <Tokenomics />
+              <Presale />
+              <Staking />
+              <Whitepaper />
+              <FAQ />
+              <Footer />
+            </main>
+          </div>
+        </WalletModalProvider>
+      </WalletProvider>
+    </ConnectionProvider>
   );
+};
 
-    return (
-
-      <ConnectionProvider endpoint={endpoint}>
-        <WalletProvider wallets={wallets} autoConnect>
-          <WalletModalProvider>
-            <div className="min-h-screen bg-gray-900">
-              <Navbar />
-              <main>
-                <Hero />
-                <About />
-                <Tokenomics />
-                <Presale />
-                <Staking />
-                <Whitepaper />
-                <FAQ />
-                <Footer />
-              </main>
-            </div>
-          </WalletModalProvider>
-        </WalletProvider>
-      </ConnectionProvider>
-
-
-    );
-}
-
-  export default App;
+export default App;
