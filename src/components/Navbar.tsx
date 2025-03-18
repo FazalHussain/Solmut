@@ -14,7 +14,8 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
-            <span className="text-2xl font-bold gradient-text glow">$SLMT</span>
+            <img src="/images/solmut.png" alt="Solmut Logo" className="w-8 h-8 mr-2" />
+            <span className="text-2xl font-bold gradient-text glow">SOLMUT</span>
           </div>
 
           {/* Desktop Menu */}
@@ -29,7 +30,7 @@ const Navbar = () => {
                   {item}
                 </a>
               ))}
-            
+
               <div className="flex space-x-2 ml-4">
                 <a href="https://t.me/solmutOfficial" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-purple-400 transition-colors duration-200">
                   <MessageSquare size={20} />
