@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Wallet, Timer, ArrowRight } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Wallet, Timer } from 'lucide-react';
 import Countdown from 'react-countdown';
 
 import { useConnectWallet } from "../hook/connectWallet"; // Import the hook

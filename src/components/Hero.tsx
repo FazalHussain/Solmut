@@ -44,7 +44,8 @@ const Hero = () => {
             Join Presale
           </a>
           <a
-            href="/whitepaper.pdf"
+            href="https://www.solmuts.com/Solmut_whitepaper.pdf"
+            download="Solmut_Whitepaper.pdf" 
             className="inline-flex items-center px-8 py-4 border border-purple-500/30 text-lg font-medium rounded-lg text-purple-300 bg-gray-900/50 hover:bg-gray-800/50 backdrop-blur-sm transform hover:scale-105 transition-all duration-200"
           >
             <Download className="mr-2" size={20} />

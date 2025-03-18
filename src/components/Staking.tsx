@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Calculator, TrendingUp, Lock, Coins } from 'lucide-react';
 
 import { useConnectWallet } from "../hook/connectWallet"; // Import the hook
@@ -7,7 +7,7 @@ import { useConnectWallet } from "../hook/connectWallet"; // Import the hook
 const Staking = () => {
 
   // Use the custom hook for wallet logic
-  const { connect, disconnect, connected, publicKey } = useConnectWallet();
+  const { connect, connected } = useConnectWallet();
 
   const [stakeAmount, setStakeAmount] = useState<string>('1000');
   const [stakingPeriod, setStakingPeriod] = useState<string>('30');
