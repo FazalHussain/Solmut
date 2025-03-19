@@ -32,7 +32,7 @@ const FAQ = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
-    <section id="faq" className="py-20 bg-gray-900/50 backdrop-blur-sm border-t border-purple-500/20">
+    <section id="faq" className="pt-20 pb-0 bg-gray-900/50 backdrop-blur-sm border-t border-purple-500/20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-3xl font-bold sm:text-4xl gradient-text glow">Frequently Asked Questions</h2>

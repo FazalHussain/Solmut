@@ -1,17 +1,22 @@
 import React, { useState } from 'react';
-import { Menu, X, MessageSquare, Twitter } from 'lucide-react';
+import { Menu, X, MessageSquare, Twitter, Send } from 'lucide-react';
+
+import { useConnectWallet } from "../hook/connectWallet"; // Import the hook
+import { TELEGRAM_URL, TWITTER_URL, WHITEPAPER_URL } from '../constants/constants';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const menuItems = ['Home', 'About', 'Tokenomics', 'Presale', 'Staking', 'FAQ', 'Whitepaper'];
+  const { connect, disconnect, connected, publicKey } = useConnectWallet();
 
   return (
     <nav className="fixed w-full bg-gray-900/90 backdrop-blur-sm z-50 border-b border-purple-500/20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          <div className="flex items-center">
-            <span className="text-2xl font-bold gradient-text glow">$SLMT</span>
+          <div className="flex items-center cursor-pointer" onClick={() => window.location.href = '/'}>
+            <img src="/images/solmut.png" alt="Solmut Logo" className="w-8 h-8 mr-2 rounded-full" />
+            <span className="text-2xl font-bold gradient-text glow">SOLMUT</span>
           </div>
 
           {/* Desktop Menu */}
@@ -20,20 +25,28 @@ const Navbar = () => {
               {menuItems.map((item) => (
                 <a
                   key={item}
-                  href={`#${item.toLowerCase()}`}
+                  href={item === 'Whitepaper' ? WHITEPAPER_URL : `#${item.toLowerCase()}`}
+                target={item === 'Whitepaper' ? "_blank" : "_self"}  // Open whitepaper in a new tab
                   className="text-gray-300 hover:text-purple-400 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200"
                 >
                   {item}
                 </a>
               ))}
+
               <div className="flex space-x-2 ml-4">
                 <a href="https://t.me/solmutOfficial" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-purple-400 transition-colors duration-200">
-                  <MessageSquare size={20} />
+                  <Send size={20} />
                 </a>
                 <a href="https://twitter.com/solmutOfficial" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-purple-400 transition-colors duration-200">
                   <Twitter size={20} />
                 </a>
               </div>
+              <button
+                onClick={connected ? disconnect : connect}
+                className="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-lg"
+              >
+                {connected ? `Disconnect (${publicKey?.toBase58().slice(0, 4)}...${publicKey?.toBase58().slice(-4)})` : "Connect Wallet"}
+              </button>
             </div>
           </div>
 
@@ -63,11 +76,17 @@ const Navbar = () => {
                 {item}
               </a>
             ))}
+            <button
+              onClick={connected ? disconnect : connect}
+              className="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-lg"
+            >
+              {connected ? `Disconnect (${publicKey?.toBase58().slice(0, 4)}...${publicKey?.toBase58().slice(-4)})` : "Connect Wallet"}
+            </button>
             <div className="flex space-x-4 px-3 py-2">
-              <a href="https://t.me/solmutOfficial" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-purple-400 transition-colors duration-200">
-                <MessageSquare size={20} />
+              <a href={TELEGRAM_URL} target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-purple-400 transition-colors duration-200">
+                <Send size={20} />
               </a>
-              <a href="https://x.com/solmutOfficial" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-purple-400 transition-colors duration-200">
+              <a href={TWITTER_URL} target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-purple-400 transition-colors duration-200">
                 <Twitter size={20} />
               </a>
             </div>

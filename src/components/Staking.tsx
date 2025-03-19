@@ -1,7 +1,14 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Calculator, TrendingUp, Lock, Coins } from 'lucide-react';
 
+import { useConnectWallet } from "../hook/connectWallet"; // Import the hook
+
+
 const Staking = () => {
+
+  // Use the custom hook for wallet logic
+  const { connect, connected } = useConnectWallet();
+
   const [stakeAmount, setStakeAmount] = useState<string>('1000');
   const [stakingPeriod, setStakingPeriod] = useState<string>('30');
 
@@ -13,7 +20,7 @@ const Staking = () => {
   };
 
   return (
-    <section id="staking" className="py-20 bg-gray-900/30 backdrop-blur-sm">
+    <section id="staking" className="pt-20 pb-0 bg-gray-900/30 backdrop-blur-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-3xl font-bold sm:text-4xl gradient-text glow">Staking Rewards</h2>
@@ -69,9 +76,11 @@ const Staking = () => {
                 </div>
               </div>
 
-              <button className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 text-white font-bold py-3 px-6 rounded-lg flex items-center justify-center space-x-2 transform hover:scale-105 transition-all duration-200 neon-border">
+              <button className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 text-white font-bold py-3 px-6 rounded-lg flex items-center justify-center space-x-2 transform hover:scale-105 transition-all duration-200 neon-border"
+                onClick={connected ? () => { } : connect}
+                disabled={connected}>
                 <Lock size={20} />
-                <span>Connect Wallet to Stake</span>
+                <span>{connected ? "Your Staking Journey Begins Soon!" : "Connect Wallet to Stake"}</span>
               </button>
             </div>
           </div>

@@ -1,12 +1,12 @@
 import React from 'react';
+import { WHITEPAPER_URL } from '../constants/constants';
 import { Download, Rocket } from 'lucide-react';
 
 const Hero = () => {
   return (
-    <div className="relative min-h-screen flex items-center justify-center animated-bg">
-    
+    <section id="home" className="relative min-h-screen flex items-center justify-center animated-bg">
       <div className="absolute inset-0 z-0 bg-gradient-to-b from-gray-900/50 to-gray-900/90" />
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 text-center">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-0 text-center">
         <div className="flex justify-center mb-8">
           <div className="relative w-64 h-64 md:w-80 md:h-80">
             <img
@@ -44,7 +44,8 @@ const Hero = () => {
             Join Presale
           </a>
           <a
-            href="/whitepaper.pdf"
+            href={WHITEPAPER_URL}
+            target="_blank"
             className="inline-flex items-center px-8 py-4 border border-purple-500/30 text-lg font-medium rounded-lg text-purple-300 bg-gray-900/50 hover:bg-gray-800/50 backdrop-blur-sm transform hover:scale-105 transition-all duration-200"
           >
             <Download className="mr-2" size={20} />
@@ -52,7 +53,7 @@ const Hero = () => {
           </a>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
