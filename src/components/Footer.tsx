@@ -1,15 +1,16 @@
 import React from "react";
 import { Twitter, Send, FileText, Users, Info, BarChart3 } from "lucide-react";
+import { COIN_DISCOVERY_URL, COIN_MOONER_URL, COIN_SNIPPER_URL, COMMUNITY_GUIDELINE_URL, TELEGRAM_URL, TWITTER_URL, WHITEPAPER_URL } from "../constants/constants";
 
 const footerLinks = [
   {
     name: "Whitepaper",
-    url: "whitepaper",
+    url: WHITEPAPER_URL,
     icon: <FileText className="w-4 h-4 text-gray-300" />,
   },
   {
     name: "Community Guidelines",
-    url: "/community-guidelines",
+    url: COMMUNITY_GUIDELINE_URL,
     icon: <Users className="w-4 h-4 text-purple-300" />,
   },
   {
@@ -27,12 +28,12 @@ const footerLinks = [
 const socialLinks = [
   {
     name: "Twitter",
-    url: "https://twitter.com/solmutOfficial",
+    url: TWITTER_URL,
     icon: <Twitter className="w-6 h-6 text-blue-400" />,
   },
   {
     name: "Telegram",
-    url: "https://t.me/solmutOfficial",
+    url: TELEGRAM_URL,
     icon: <Send className="w-6 h-6 text-blue-500" />,
   },
 ];
@@ -40,23 +41,23 @@ const socialLinks = [
 const listingLinks = [
   {
     name: "CoinMooner",
-    url: "https://coinmooner.com/coins/solmut-slmt",
+    url: COIN_MOONER_URL,
     logo: "/images/coinmooner.png", // Update with actual image path
   },
   {
     name: "CoinSniper",
-    url: "https://coinsniper.net/coin/79522",
+    url: COIN_SNIPPER_URL,
     logo: "/images/coinsniper.png", // Update with actual image path
   },
   {
     name: "CoinDiscovery",
-    url: "https://coindiscovery.app/coin/solmut/overview",
+    url: COIN_DISCOVERY_URL,
     logo: "/images/coindiscovery.png", // Update with actual image path
   },
 ];
 
 const Footer = () => {
-  
+
   const scrollToSection = (id: string, event: React.MouseEvent) => {
     event.preventDefault(); // Prevent default anchor behavior
     const element = document.getElementById(id);
@@ -73,7 +74,7 @@ const Footer = () => {
   return (
     <footer className="bg-gray-900/50 backdrop-blur-sm border-t border-purple-500/20 py-6">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        
+
         {/* Social Links */}
         <div className="flex justify-center space-x-6 mb-4">
           {socialLinks.map((link) => (
@@ -90,19 +91,19 @@ const Footer = () => {
         </div>
 
         {/* Listing Platforms */}
-        <div className="flex justify-center space-x-24 mb-4">
+        <div className="flex flex-wrap justify-center gap-6 sm:gap-12 mb-4">
           {listingLinks.map((link) => (
             <a
               key={link.name}
               href={link.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="transition-all duration-200 transform hover:scale-110"
+              className="transition-all duration-200 transform hover:scale-105"
             >
               <img
                 src={link.logo}
                 alt={link.name}
-                className="h-8 w-auto"
+                className="h-6 sm:h-8 md:h-10 w-auto" // Smaller on small screens, normal on larger screens
               />
             </a>
           ))}
@@ -112,10 +113,15 @@ const Footer = () => {
         <div className="flex flex-wrap justify-center space-x-6 text-gray-300 mb-4 mt-6">
           {footerLinks.map((link) => (
             <a
-            key={link.name}
-            href={`#${link.url}`} // Link to the section by ID
-            onClick={(event) => scrollToSection(link.url, event)} // Handle the scroll on click
-            className="flex items-center gap-1 text-sm hover:text-white transition-all duration-200"
+              key={link.name}
+              href={link.url.startsWith('http') ? link.url : `#${link.url}`}
+              onClick={(event) => {
+                if (!link.url.startsWith('http')) { // Only handle scroll for internal links
+                  scrollToSection(link.url, event);
+                }
+              }}
+              target={link.url.startsWith('http') ? '_blank' : '_self'} // Open external link in new tab
+              className="flex items-center gap-1 text-sm hover:text-white transition-all duration-200"
             >
               {link.icon}
               {link.name}

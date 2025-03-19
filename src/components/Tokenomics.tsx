@@ -13,7 +13,7 @@ const tokenomicsData = [
 
 const Tokenomics = () => {
   return (
-    <section id="tokenomics" className="py-20 bg-gray-900/30 backdrop-blur-sm">
+    <section id="tokenomics" className="pt-20 pb-0 bg-gray-900/30 backdrop-blur-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-3xl font-bold sm:text-4xl gradient-text glow">Tokenomics</h2>

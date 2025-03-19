@@ -16,7 +16,8 @@ import Presale from './components/Presale';
 import Staking from './components/Staking';
 import FAQ from './components/FAQ';
 import Footer from './components/Footer';
-import Whitepaper from './components/Whitepaper';
+import ZKCompression from './components/ZKCompression';
+import RaisedTracker from './components/RaisedTracker';
 
 const App = () => {
   const [isPhantomAvailable, setIsPhantomAvailable] = useState(false); // Track Phantom availability
@@ -56,8 +57,9 @@ const App = () => {
               <About />
               <Tokenomics />
               <Presale />
+              <RaisedTracker />
               <Staking />
-              <Whitepaper />
+              <ZKCompression />
               <FAQ />
               <Footer />
             </main>
