@@ -8,3 +8,8 @@ export const TELEGRAM_URL = "https://t.me/solmutOfficial"
 export const COIN_MOONER_URL = "https://coinmooner.com/coins/solmut-slmt"
 export const COIN_SNIPPER_URL = "https://coinsniper.net/coin/79522"
 export const COIN_DISCOVERY_URL = "https://coindiscovery.app/coin/solmut/overview"
+
+export const TOTAL_SUPPLY = 100_000_000 // 100 MILLION SUPPLY
+export const PRESALE_TOKEN_ALLOCATION = 15_000_000 // 15 MILLION PRESALE ALLOCATION
+export const MINIMUM_BUY = 10
+export const MAXIMUM_BUY = 2000

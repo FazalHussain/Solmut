@@ -1,10 +1,12 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { Calculator, TrendingUp, Lock, Coins } from 'lucide-react';
-
+import { motion, useInView } from "framer-motion";
 import { useConnectWallet } from "../hook/connectWallet"; // Import the hook
 
 
 const Staking = () => {
+  const ref = useRef(null);
+  const isFullyInView = useInView(ref, { once: true, amount: 0.5 });
 
   // Use the custom hook for wallet logic
   const { connect, connected } = useConnectWallet();
@@ -20,17 +22,29 @@ const Staking = () => {
   };
 
   return (
-    <section id="staking" className="pt-20 pb-0 bg-gray-900/30 backdrop-blur-sm">
+    <section id="staking" className="pt-20 pb-0 bg-gray-900/30 backdrop-blur-sm" ref={ref}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
+        <motion.div
+          ref={ref} // Attach the ref here for animation
+          initial={{ opacity: 0, y: 40 }}
+          animate={isFullyInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.7, ease: 'easeOut' }}
+          className="text-center mb-16">
           <h2 className="text-3xl font-bold sm:text-4xl gradient-text glow">Staking Rewards</h2>
           <p className="mt-4 text-xl text-gray-300">
             Earn passive income by staking your $SLMT tokens
           </p>
-        </div>
+        </motion.div>
+
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          <div className="bg-gray-800/50 backdrop-blur-sm rounded-xl p-8 border border-purple-500/20">
+          <motion.div
+            ref={ref}
+            initial={{ opacity: 0, y: 40 }}
+            animate={isFullyInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.7, ease: 'easeOut' }}
+            className="bg-gray-800/50 backdrop-blur-sm rounded-xl p-8 border border-purple-500/20"
+          >
             <h3 className="text-2xl font-bold text-purple-300 mb-6">Rewards Calculator</h3>
             <div className="space-y-6">
               <div>
@@ -83,10 +97,16 @@ const Staking = () => {
                 <span>{connected ? "Your Staking Journey Begins Soon!" : "Connect Wallet to Stake"}</span>
               </button>
             </div>
-          </div>
+          </motion.div>
+
 
           <div className="space-y-8">
-            <div className="bg-gray-800/50 backdrop-blur-sm rounded-xl p-8 border border-purple-500/20">
+            <motion.div
+              ref={ref}
+              initial={{ opacity: 0, y: 40 }}
+              animate={isFullyInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.7, ease: 'easeOut', delay: 0.2 }}
+              className="bg-gray-800/50 backdrop-blur-sm rounded-xl p-8 border border-purple-500/20">
               <h3 className="text-2xl font-bold text-purple-300 mb-6">Staking Benefits</h3>
               <div className="space-y-6">
                 {[
@@ -120,7 +140,8 @@ const Staking = () => {
                   </div>
                 ))}
               </div>
-            </div>
+            </motion.div>
+
 
             <div className="bg-gradient-to-r from-purple-500/10 to-blue-500/10 rounded-xl p-8 border border-purple-500/20">
               <div className="flex items-center gap-4">

@@ -1,17 +1,44 @@
 import { useState, useEffect } from 'react';
 import { Wallet, Timer } from 'lucide-react';
 import Countdown from 'react-countdown';
+import { motion, AnimatePresence } from "framer-motion";
 
 import { useConnectWallet } from "../hook/connectWallet"; // Import the hook
+import { usePresaleProgress } from "../hook/presaleProvider"; // Import the hook
+import { MAXIMUM_BUY, MINIMUM_BUY, PRESALE_TOKEN_ALLOCATION } from '../constants/constants';
 
 
 const Presale = () => {
-  const [amount, setAmount] = useState<string>('1000');
-  const presaleEndDate = new Date('2025-06-01T00:00:00');
-  const tokenPrice = 0.005;
 
-  // Use the custom hook for wallet logic
+  const [ctaText, setCtaText] = useState("Buy Now");
+  const [recentBuyers, setRecentBuyers] = useState(0);
+  const [showLimitedTag, setShowLimitedTag] = useState(true);
+  const [amount, setAmount] = useState<string>('1000');
+
+  const presaleEndDate = new Date('2025-06-01T00:00:00');
+  const { currentTier } = usePresaleProgress();
+  const tokenPrice = currentTier?.price;
+
   const { connect, disconnect, connected, publicKey } = useConnectWallet();
+
+  // Rotate button text every few seconds to create urgency
+  useEffect(() => {
+    const texts = ["Buy Now", "Limited Spots Left!", "Best Price Guaranteed"];
+    let index = 0;
+    const interval = setInterval(() => {
+      setCtaText(texts[index]);
+      index = (index + 1) % texts.length;
+    }, 8000);
+    return () => clearInterval(interval);
+  }, []);
+
+  // Simulated live counter for buyers
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setRecentBuyers((prev) => prev + Math.floor(Math.random() * 5)); // Simulate random purchases
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
 
   const calculateTokens = (usdAmount: string): number => {
     return parseFloat(usdAmount) / tokenPrice;
@@ -27,7 +54,7 @@ const Presale = () => {
     if (completed) {
       return <span className="text-red-500">Presale Ended!</span>;
     }
-    
+
     return (
       <div className="grid grid-cols-4 gap-4 text-center">
         {[
@@ -66,15 +93,15 @@ const Presale = () => {
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-gray-400">Allocation:</span>
-                  <span className="text-white font-semibold">15,000,000 $SLMT</span>
+                  <span className="text-white font-semibold">{PRESALE_TOKEN_ALLOCATION.toLocaleString()} $SLMT</span>
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-gray-400">Minimum Buy:</span>
-                  <span className="text-white font-semibold">$50</span>
+                  <span className="text-white font-semibold">${MINIMUM_BUY}</span>
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-gray-400">Maximum Buy:</span>
-                  <span className="text-white font-semibold">$5,000</span>
+                  <span className="text-white font-semibold">${MAXIMUM_BUY.toLocaleString()}</span>
                 </div>
               </div>
             </div>
@@ -105,13 +132,41 @@ const Presale = () => {
                   {calculateTokens(amount).toLocaleString()} $SLMT
                 </span>
               </div>
-              
-              <button 
-              className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 text-white font-bold py-3 px-6 rounded-lg flex items-center justify-center space-x-2 transform hover:scale-105 transition-all duration-200 neon-border"
-              onClick={connected ? disconnect : connect}>
+
+              <button
+                className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 text-white font-bold py-3 px-6 rounded-lg flex items-center justify-center space-x-2 transition-all duration-200 neon-border"
+                onClick={() => {
+                  connect();
+                  setShowLimitedTag(false); // Hide tag after clicking
+                }}
+              >
                 <Wallet size={20} />
-                <span>{connected ? "Buy Now" : "Connect Wallet to Buy"}</span>
+                <span>{connected ? ctaText : "Connect Wallet to Buy"}</span>
               </button>
+
+              {/* Limited time tag */}
+              {showLimitedTag && (
+                <div className="text-sm text-red-500 mt-4 bg-gradient-to-r from-red-500 to-red-700 px-4 py-2 rounded-lg shadow-xl flex items-center justify-center space-x-2 transform hover:scale-105 transition-transform duration-200 ease-in-out w-full">
+                  <span className="font-semibold text-white text-base">🔥</span>
+                  <span className="text-white font-semibold text-lg">Limited-time offer, act fast!</span>
+                </div>
+              )}
+
+              {/* Social Proof */}
+              {recentBuyers > 0 && (
+                <AnimatePresence>
+                  <motion.p
+                    key={recentBuyers} // Ensures new entries animate separately
+                    initial={{ opacity: 0, y: 30 }} // Start slightly below
+                    animate={{ opacity: 1, y: -10 }} // Fully visible in place
+                    exit={{ opacity: 0, y: -50 }} // Moves up and fades out
+                    transition={{ duration: 2, ease: "easeOut" }} // Slow fade & move
+                    className="absolute left-0 text-white text-xs font-semibold drop-shadow-md"
+                  >
+                    🎉 {recentBuyers} people just bought $SLMT! 🚀
+                  </motion.p>
+                </AnimatePresence>
+              )}
             </div>
           </div>
 
