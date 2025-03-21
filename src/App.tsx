@@ -18,6 +18,7 @@ import FAQ from './components/FAQ';
 import Footer from './components/Footer';
 import ZKCompression from './components/ZKCompression';
 import RaisedTracker from './components/RaisedTracker';
+//import { SharedProvider } from './hook/SharedContext';
 
 const App = () => {
   const [isPhantomAvailable, setIsPhantomAvailable] = useState(false); // Track Phantom availability

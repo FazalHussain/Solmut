@@ -1,5 +1,6 @@
-
 import { ShieldCheck, Scale, Database, Rocket, Zap, Layers, Eye, CheckCircle } from 'lucide-react';
+import { motion, useInView } from 'framer-motion';
+import { useRef } from 'react';
 
 const zkFeatures = [
   {
@@ -45,22 +46,59 @@ const zkFeatures = [
 ];
 
 const ZKCompression = () => {
+  const ref = useRef(null);
+  const isFullyInView = useInView(ref, { once: true, amount: 0.5 });
+
   return (
-    <section id="zk-compression" className="pt-20 pb-0 px-4 sm:px-6 lg:px-8 bg-gray-900/50 backdrop-blur-sm border-t border-b border-purple-500/20">
-      <div className="max-w-7xl mx-auto">
+    <section
+      id="zk-compression"
+      className="pt-20 pb-0 px-4 sm:px-6 lg:px-8 bg-gray-900/50 backdrop-blur-sm border-t border-b border-purple-500/20" ref={ref}
+    >
+      <motion.div
+        ref={ref} 
+        className="max-w-7xl mx-auto"
+        initial={{ opacity: 0 }}
+        animate={isFullyInView ? { opacity: 1} : {}}
+        transition={{ duration: 1.5 }}
+      >
         <div className="text-center">
-          <h2 className="text-2xl sm:text-3xl font-bold gradient-text glow">Zero-Knowledge (ZK) Compression for Solmut ($SLMT)</h2>
-          <p className="mt-4 text-lg sm:text-xl text-gray-300 max-w-3xl mx-auto">
-            Optimizing storage, reducing costs, and enhancing scalability on Solana. 
-            ZK Compression (State Compression) allows Solmut to store data efficiently while keeping it verifiable on-chain. 
-          </p>
+          <motion.h2
+            ref={ref}
+            className="text-2xl sm:text-3xl font-bold gradient-text glow"
+            initial={{ y: -50, opacity: 0 }}
+            animate={isFullyInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ delay: 0.2, duration: 1 }}
+          >
+            Zero-Knowledge (ZK) Compression for Solmut ($SLMT)
+          </motion.h2>
+
+          <motion.p
+            ref={ref}
+            className="mt-4 text-lg sm:text-xl text-gray-300 max-w-3xl mx-auto"
+            initial={{ opacity: 0 }}
+            animate={isFullyInView ? { opacity: 1 } : {}}
+            transition={{ delay: 0.6, duration: 1 }}
+          >
+            Optimizing storage, reducing costs, and enhancing scalability on Solana.
+            ZK Compression (State Compression) allows Solmut to store data efficiently while keeping it verifiable on-chain.
+          </motion.p>
         </div>
 
-        <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <motion.div
+          ref={ref} 
+          className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+          initial={{ opacity: 0 }}
+          animate={isFullyInView ? { opacity: 1 } : {}}
+          transition={{ delay: 0.6, duration: 1 }}
+        >
           {zkFeatures.map((feature, index) => (
-            <div
+            <motion.div
+            ref={ref} 
               key={index}
               className="p-5 sm:p-6 bg-gray-800/50 backdrop-blur-sm rounded-lg border border-purple-500/20 hover:border-purple-500/40 transform hover:scale-105 transition-all duration-300"
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ delay: 0.2 * index, duration: 0.6 }}
             >
               <div className="flex items-center space-x-4">
                 <div className="w-10 h-10 flex items-center justify-center rounded-lg bg-purple-900/50">
@@ -69,17 +107,29 @@ const ZKCompression = () => {
                 <h3 className="text-md sm:text-lg font-semibold text-purple-300">{feature.title}</h3>
               </div>
               <p className="mt-2 text-gray-400 text-sm sm:text-base">{feature.description}</p>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
-        <div className="mt-16 text-gray-300">
+        <motion.div
+          ref={ref} 
+          className="mt-16 text-gray-300"
+          initial={{ opacity: 0 }}
+          animate={isFullyInView ? { opacity: 1} : {}}
+          transition={{ delay: 0.8, duration: 1 }}
+        >
           <h3 className="text-xl sm:text-2xl font-bold text-purple-300 text-center">How ZK Compression Works:</h3>
-          <div className="mt-6 space-y-4 max-w-3xl mx-auto text-base sm:text-lg leading-relaxed">
+          <motion.div
+            ref={ref} 
+            className="mt-6 space-y-4 max-w-3xl mx-auto text-base sm:text-lg leading-relaxed"
+            initial={{ opacity: 0 }}
+            animate={isFullyInView ? { opacity: 1} : {}}
+            transition={{ delay: 1, duration: 1 }}
+          >
             <p>
-              Instead of storing every account state update directly on Solana, transactions and balances are aggregated into a 
-              <span className="text-purple-400"> Merkle Tree</span>. The root of this tree is stored on-chain, while individual 
-              data points remain off-chain. <span className="text-purple-400">Zero-Knowledge Proofs (ZKPs)</span> ensure that any 
+              Instead of storing every account state update directly on Solana, transactions and balances are aggregated into a
+              <span className="text-purple-400"> Merkle Tree</span>. The root of this tree is stored on-chain, while individual
+              data points remain off-chain. <span className="text-purple-400">Zero-Knowledge Proofs (ZKPs)</span> ensure that any
               updates remain valid and verifiable.
             </p>
             <ul className="list-disc list-inside space-y-2">
@@ -88,33 +138,75 @@ const ZKCompression = () => {
               <li><span className="text-purple-400">Step 3:</span> Modify Solmut smart contracts to handle compressed accounts.</li>
               <li><span className="text-purple-400">Step 4:</span> Enable users to verify balances and transactions via Merkle proofs.</li>
             </ul>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
 
-        <div className="mt-16">
+        <motion.div
+          ref={ref} 
+          className="mt-16"
+          initial={{ opacity: 0 }}
+          animate={isFullyInView ? { opacity: 1} : {}}
+          transition={{ delay: 1.2, duration: 1 }}
+        >
           <h3 className="text-xl sm:text-2xl font-bold text-purple-300 text-center">Final Benefits of ZK Compression</h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-6 text-gray-300 text-sm sm:text-base">
-            <div className="p-4 sm:p-6 bg-gray-800/50 backdrop-blur-sm rounded-lg border border-purple-500/20 text-center">
+            <motion.div
+              ref={ref} 
+              className="p-4 sm:p-6 bg-gray-800/50 backdrop-blur-sm rounded-lg border border-purple-500/20 text-center"
+              initial={{ opacity: 0 }}
+              animate={isFullyInView ? { opacity: 1} : {}}
+              transition={{ delay: 1.4, duration: 0.6 }}
+            >
               ✅ <span className="text-purple-400">Lower Fees:</span> Saves 90%+ in storage and transaction costs.
-            </div>
-            <div className="p-4 sm:p-6 bg-gray-800/50 backdrop-blur-sm rounded-lg border border-purple-500/20 text-center">
+            </motion.div>
+            <motion.div
+              ref={ref} 
+              className="p-4 sm:p-6 bg-gray-800/50 backdrop-blur-sm rounded-lg border border-purple-500/20 text-center"
+              initial={{ opacity: 0 }}
+              animate={isFullyInView ? { opacity: 1} : {}}
+              transition={{ delay: 1.6, duration: 0.6 }}
+            >
               ✅ <span className="text-purple-400">Scalability:</span> Handles millions of transactions without slowing Solana.
-            </div>
-            <div className="p-4 sm:p-6 bg-gray-800/50 backdrop-blur-sm rounded-lg border border-purple-500/20 text-center">
+            </motion.div>
+            <motion.div
+              ref={ref} 
+              className="p-4 sm:p-6 bg-gray-800/50 backdrop-blur-sm rounded-lg border border-purple-500/20 text-center"
+              initial={{ opacity: 0 }}
+              animate={isFullyInView ? { opacity: 1} : {}}
+              transition={{ delay: 1.8, duration: 0.6 }}
+            >
               ✅ <span className="text-purple-400">Decentralization:</span> Keeps all data verifiable on-chain.
-            </div>
-            <div className="p-4 sm:p-6 bg-gray-800/50 backdrop-blur-sm rounded-lg border border-purple-500/20 text-center">
+            </motion.div>
+            <motion.div
+              ref={ref} 
+              className="p-4 sm:p-6 bg-gray-800/50 backdrop-blur-sm rounded-lg border border-purple-500/20 text-center"
+              initial={{ opacity: 0 }}
+              animate={isFullyInView ? { opacity: 1} : {}}
+              transition={{ delay: 2, duration: 0.6 }}
+            >
               ✅ <span className="text-purple-400">Efficient Airdrops:</span> Distribute tokens at minimal cost.
-            </div>
-            <div className="p-4 sm:p-6 bg-gray-800/50 backdrop-blur-sm rounded-lg border border-purple-500/20 text-center">
+            </motion.div>
+            <motion.div
+              ref={ref} 
+              className="p-4 sm:p-6 bg-gray-800/50 backdrop-blur-sm rounded-lg border border-purple-500/20 text-center"
+              initial={{ opacity: 0 }}
+              animate={isFullyInView ? { opacity: 1} : {}}
+              transition={{ delay: 2.2, duration: 0.6 }}
+            >
               ✅ <span className="text-purple-400">Trustless Validation:</span> Users can verify claims without centralization.
-            </div>
-            <div className="p-4 sm:p-6 bg-gray-800/50 backdrop-blur-sm rounded-lg border border-purple-500/20 text-center">
+            </motion.div>
+            <motion.div
+              ref={ref} 
+              className="p-4 sm:p-6 bg-gray-800/50 backdrop-blur-sm rounded-lg border border-purple-500/20 text-center"
+              initial={{ opacity: 0 }}
+              animate={isFullyInView ? { opacity: 1} : {}}
+              transition={{ delay: 2.4, duration: 0.6 }}
+            >
               ✅ <span className="text-purple-400">Faster Transactions:</span> Smart contract interactions run efficiently.
-            </div>
+            </motion.div>
           </div>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </section>
   );
 };
