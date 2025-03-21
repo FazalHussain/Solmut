@@ -29,7 +29,6 @@ const App = () => {
   const wallets = useMemo(() => {
     const availableWallets: any[] = [
       new SolflareWalletAdapter(),
-      new UnsafeBurnerWalletAdapter(),
     ];
 
     // Add Phantom if available
