@@ -47,8 +47,7 @@ const zkFeatures = [
 
 const ZKCompression = () => {
   const ref = useRef(null);
-  const isFullyInView = useInView(ref, { once: true, amount: 0.5 });
-
+  const isFullyInView = useInView(ref, { once: false, amount: 0.1 }); 
   return (
     <section
       id="zk-compression"

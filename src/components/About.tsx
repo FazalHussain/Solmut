@@ -29,7 +29,7 @@ const About = () => {
   const ref = useRef(null);
   
   // Trigger animation only when the entire section is in view (fully visible)
-  const isFullyInView = useInView(ref, { once: true, amount: 1.0 });
+  const isFullyInView = useInView(ref, { once: true, amount: 0.5 });
 
   return (
     <section
