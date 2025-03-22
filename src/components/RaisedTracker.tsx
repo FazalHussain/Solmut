@@ -6,7 +6,7 @@ import { motion, AnimatePresence, useInView } from "framer-motion";
 
 const RaisedTracker = () => {
   const ref = useRef(null);
-  const isFullyInView = useInView(ref, { once: true, amount: 0.5 });
+  const isFullyInView = useInView(ref, { once: true, amount: 0.3 });
 
   const { overallProgress, setTotalRaised, highlight, currentTier, totalRaised, tierProgress } = usePresaleProgress();
 

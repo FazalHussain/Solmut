@@ -1,10 +1,30 @@
 import React, { useState } from 'react';
 import { Menu, X, MessageSquare, Twitter, Send } from 'lucide-react';
-
 import { useConnectWallet } from "../hook/connectWallet"; // Import the hook
 import { TELEGRAM_URL, TWITTER_URL, WHITEPAPER_URL } from '../constants/constants';
 
+import { usePhantom } from '../hook/usePhantom';
+import { WalletButton } from '../components/WalletButton';
+
 const Navbar = () => {
+
+  const {
+    walletAddress,
+    connecting,
+    isPhantomInstalled,
+    connectWallet,
+    disconnectWallet
+  } = usePhantom();
+
+  const handleWalletAction = () => {
+    if (walletAddress) {
+      disconnectWallet();
+    } else {
+      connectWallet();
+    }
+  }
+
+
   const [isOpen, setIsOpen] = useState(false);
 
   const menuItems = ['Home', 'About', 'Tokenomics', 'Presale', 'Staking', 'FAQ', 'Whitepaper'];
@@ -41,12 +61,13 @@ const Navbar = () => {
                   <Twitter size={20} />
                 </a>
               </div>
-              <button
-                onClick={connected ? disconnect : connect}
-                className="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-lg"
-              >
-                {connected ? `Disconnect (${publicKey?.toBase58().slice(0, 4)}...${publicKey?.toBase58().slice(-4)})` : "Connect Wallet"}
-              </button>
+
+              <WalletButton
+              onClick={handleWalletAction}
+              isConnected={!!walletAddress}
+              isConnecting={connecting}
+              address={walletAddress}
+            />
             </div>
           </div>
 

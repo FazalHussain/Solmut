@@ -2,12 +2,17 @@ import { useEffect } from "react";
 import { useWallet } from "@solana/wallet-adapter-react";
 
 export const useConnectWallet = () => {
-  const { wallet, connect, disconnect, connected, publicKey } = useWallet();
+  const { wallet, select, connect, disconnect, connected, wallets, publicKey } = useWallet();
 
   const handleConnect = async () => {
     if (!wallet) {
-      alert("Please select a wallet manually.");
-      return;
+      if (wallets.length === 0) {
+        alert("No wallets available. Please install Phantom or another wallet.");
+        return;
+      }
+
+      select(wallets[0].adapter.name); // Auto-select the first available wallet
+      return; // Stop here, let effect handle connection
     }
 
     try {
@@ -17,11 +22,15 @@ export const useConnectWallet = () => {
     }
   };
 
+  // Auto-connect after selecting a wallet
   useEffect(() => {
-    if (wallet && !connected) {
-      console.log("Wallet selected but not connected. Waiting for manual connection.");
+    if (wallet) {
+      connect().catch((error) => console.error("Auto Connect Error:", error));
     }
-  }, [wallet, connected]);
+    if (connected && publicKey) {
+      console.log("Connected Wallet Address:", publicKey.toBase58());
+    }
+  }, [wallet, connect]);
 
   return { connect: handleConnect, disconnect, connected, publicKey };
 };

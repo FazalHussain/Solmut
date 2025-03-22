@@ -6,7 +6,7 @@ import { useConnectWallet } from "../hook/connectWallet"; // Import the hook
 
 const Staking = () => {
   const ref = useRef(null);
-  const isFullyInView = useInView(ref, { once: true, amount: 0.5 });
+  const isFullyInView = useInView(ref, { once: true, amount: 0.3 });
 
   // Use the custom hook for wallet logic
   const { connect, connected } = useConnectWallet();
