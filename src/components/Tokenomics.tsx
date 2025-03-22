@@ -15,7 +15,7 @@ const tokenomicsData = [
 
 const Tokenomics = () => {
   const ref = useRef(null);
-  const isFullyInView = useInView(ref, { once: true, amount: 0.5 });
+  const isFullyInView = useInView(ref, { once: true, amount: 0.3 });
 
   return (
     <section id="tokenomics" className="pt-20 pb-20 bg-gray-900/30 backdrop-blur-sm" ref={ref}>
