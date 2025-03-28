@@ -3,7 +3,7 @@ import { Wallet, Timer } from 'lucide-react';
 import Countdown from 'react-countdown';
 import { motion, AnimatePresence } from "framer-motion";
 
-import { useConnectWallet } from "../hook/connectWallet"; // Import the hook
+import { useSharedState } from '../hook/SharedContext'; // Adjust path as needed
 import { usePresaleProgress } from "../hook/presaleProvider"; // Import the hook
 import { MAXIMUM_BUY, MINIMUM_BUY, PRESALE_TOKEN_ALLOCATION } from '../constants/constants';
 
@@ -18,8 +18,16 @@ const Presale = () => {
   const presaleEndDate = new Date('2025-06-01T00:00:00');
   const { currentTier } = usePresaleProgress();
   const tokenPrice = currentTier?.price;
+  const { phantom } = useSharedState();
 
-  const { connect, disconnect, connected, publicKey } = useConnectWallet();
+  const handleWalletAction = () => {
+    if (phantom.walletAddress) {
+      phantom.disconnectWallet();
+    } else {
+      phantom.connectWallet();
+    }
+  }
+
 
   // Rotate button text every few seconds to create urgency
   useEffect(() => {
@@ -43,12 +51,6 @@ const Presale = () => {
   const calculateTokens = (usdAmount: string): number => {
     return parseFloat(usdAmount) / tokenPrice;
   };
-
-  useEffect(() => {
-    if (connected && publicKey) {
-      console.log("Connected Wallet Address:", publicKey.toBase58());
-    }
-  });
 
   const renderer = ({ days, hours, minutes, seconds, completed }: any) => {
     if (completed) {
@@ -136,12 +138,12 @@ const Presale = () => {
               <button
                 className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 text-white font-bold py-3 px-6 rounded-lg flex items-center justify-center space-x-2 transition-all duration-200 neon-border"
                 onClick={() => {
-                  connect();
+                  handleWalletAction();
                   setShowLimitedTag(false); // Hide tag after clicking
                 }}
               >
                 <Wallet size={20} />
-                <span>{connected ? ctaText : "Connect Wallet to Buy"}</span>
+                <span>{phantom.walletAddress ? ctaText : "Connect Wallet to Buy"}</span>
               </button>
 
               {/* Limited time tag */}

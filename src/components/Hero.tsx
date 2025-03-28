@@ -18,7 +18,7 @@ const Hero = () => {
         >
           <div className="relative w-64 h-64 md:w-80 md:h-80">
             <img
-              src="https://black-fast-dormouse-2.mypinata.cloud/ipfs/bafybeidtjlqdnxhhujus2gjbhtt6ycnkcbr2o3mpmokde5g7amt3siznqm"
+              src="images/solmut_hero.png"
               alt="Solmut Mascot"
               className="w-full h-full object-contain transform hover:scale-105 transition-all duration-300"
               style={{

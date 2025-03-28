@@ -8,24 +8,27 @@ import FAQ from './components/FAQ';
 import Footer from './components/Footer';
 import ZKCompression from './components/ZKCompression';
 import RaisedTracker from './components/RaisedTracker';
-//import { SharedProvider } from './hook/SharedContext';
+import { SharedProvider } from './hook/SharedContext';
 
 const App = () => {
 
   return (
     <div className="min-h-screen bg-gray-900">
-      <Navbar />
-      <main>
-        <Hero />
-        <About />
-        <Tokenomics />
-        <Presale />
-        <RaisedTracker />
-        <Staking />
-        <ZKCompression />
-        <FAQ />
-        <Footer />
-      </main>
+      <SharedProvider>
+        <Navbar />
+        <main>
+          <Hero />
+          <About />
+          <Tokenomics />
+          <Presale />
+          <RaisedTracker />
+          <Staking />
+          <ZKCompression />
+          <FAQ />
+          <Footer />
+        </main>
+      </SharedProvider>
+
     </div>
   );
 };

@@ -22,7 +22,7 @@ export const usePhantom = () => {
       if (!provider) {
         if (isMobile()) {
             // Redirect to Google Play Store
-            window.location.href = 'https://play.google.com/store/apps/details?id=app.phantom';
+            window.location.href = "https://phantom.app/ul/browse/https%3A%2F%2Fsolana.com";
           } else {
             // Redirect to Phantom browser extension
             window.location.href = 'https://chromewebstore.google.com/detail/phantom/bfnaelmomeimhlpmgjnjophhpkkoljpa';
@@ -39,6 +39,8 @@ export const usePhantom = () => {
       setConnecting(false);
     }
   }, []);
+
+  
 
   const disconnectWallet = useCallback(async () => {
     try {

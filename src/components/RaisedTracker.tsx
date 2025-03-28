@@ -57,14 +57,14 @@ const RaisedTracker = () => {
             ></div>
           </div>
 
-          {<div className="text-center mt-6">
+          {/* {<div className="text-center mt-6">
             <button
               className="px-6 py-3 bg-gradient-to-r from-purple-600 to-blue-600 text-white font-bold rounded-lg hover:scale-105 transition-all duration-200"
               onClick={() => setTotalRaised(totalRaised + 5000)}
             >
               Simulate $5,000 Raised (Testing)
             </button>
-          </div>}
+          </div>} */}
         </div>
 
       </motion.div>

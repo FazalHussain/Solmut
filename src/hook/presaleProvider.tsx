@@ -9,7 +9,7 @@ const tiers = [
   ];
 
 // Custom hook for presale progress
-export const usePresaleProgress = (initialRaised: number = 0) => {
+export const usePresaleProgress = (initialRaised: number = 2000) => {
   const [totalRaised, setTotalRaised] = useState<number>(initialRaised);
   const [highlight, setHighlight] = useState<boolean>(false);
    
