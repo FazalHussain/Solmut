@@ -163,7 +163,7 @@ const Presale = () => {
                     animate={{ opacity: 1, y: -10 }} // Fully visible in place
                     exit={{ opacity: 0, y: -50 }} // Moves up and fades out
                     transition={{ duration: 2, ease: "easeOut" }} // Slow fade & move
-                    className="absolute left-0 text-white text-xs font-semibold drop-shadow-md"
+                    className="absolute left-8 text-white text-xs font-semibold drop-shadow-md"
                   >
                     🎉 {recentBuyers} people just bought $SLMT! 🚀
                   </motion.p>
