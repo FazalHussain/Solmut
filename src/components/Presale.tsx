@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useSharedState } from '../hook/SharedContext'; // Adjust path as needed
 import { usePresaleProgress } from "../hook/presaleProvider"; // Import the hook
 import { MAXIMUM_BUY, MINIMUM_BUY, PRESALE_TOKEN_ALLOCATION } from '../constants/constants';
+import BuyNowButton from './BuyNowButton';
 
 
 const Presale = () => {
@@ -75,7 +76,7 @@ const Presale = () => {
   };
 
   return (
-    <section id="presale" className="pt-20 pb-0 bg-gray-900/50 backdrop-blur-sm border-t border-b border-purple-500/20">
+    <section id="presale" className="pt-0 pb-0 bg-gray-900/50 backdrop-blur-sm border-purple-500/20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-3xl font-bold sm:text-4xl gradient-text glow">Presale Now Live!</h2>
@@ -135,8 +136,8 @@ const Presale = () => {
                 </span>
               </div>
 
-              <button
-                className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 text-white font-bold py-3 px-6 rounded-lg flex items-center justify-center space-x-2 transition-all duration-200 neon-border"
+              {/* <button
+                className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:scale-105 transition-transform duration-200 ease-in-out w-full text-white font-bold py-3 px-6 rounded-lg flex items-center justify-center space-x-2 transition-all duration-200 neon-border"
                 onClick={() => {
                   handleWalletAction();
                   setShowLimitedTag(false); // Hide tag after clicking
@@ -144,7 +145,14 @@ const Presale = () => {
               >
                 <Wallet size={20} />
                 <span>{phantom.walletAddress ? ctaText : "Connect Wallet to Buy"}</span>
-              </button>
+              </button> */}
+
+              <BuyNowButton
+                handleWalletAction={handleWalletAction}
+                ctaText={ctaText}
+                phantom={phantom}
+                setShowLimitedTag={() => setShowLimitedTag(false)}
+              />
 
               {/* Limited time tag */}
               {showLimitedTag && (

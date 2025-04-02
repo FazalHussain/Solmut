@@ -34,7 +34,7 @@ const About = () => {
   return (
     <section
       id="about"
-      className="pt-20 pb-0 bg-gray-900/50 backdrop-blur-sm border-t border-b border-purple-500/20"
+      className="pt-20 pb-0 bg-gray-900/50 backdrop-blur-sm border-purple-500/20"
       ref={ref}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

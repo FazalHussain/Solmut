@@ -14,13 +14,13 @@ const RaisedTracker = () => {
 
   return (
 
-    <section className="pt-10 pb-0 bg-gray-900/50 backdrop-blur-sm border-t border-purple-500/20" ref={ref}>
+    <section className="pt-0 pb-0 bg-gray-900/50 backdrop-blur-sm border-purple-500/20" ref={ref}>
       <motion.div
         ref={ref}
         initial={{ opacity: 0, y: 40 }}
         animate={isFullyInView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.8, ease: 'easeOut', delay: 0.2 }}
-        className="bg-gray-800/50 backdrop-blur-sm rounded-xl p-8 border border-purple-500/20"
+        className="backdrop-blur-sm rounded-xl p-8"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h3 className="text-3xl font-bold text-center mb-6 gradient-text glow">Presale Progress</h3>

@@ -51,7 +51,7 @@ const ZKCompression = () => {
   return (
     <section
       id="zk-compression"
-      className="pt-20 pb-0 px-4 sm:px-6 lg:px-8 bg-gray-900/50 backdrop-blur-sm border-t border-b border-purple-500/20" ref={ref}
+      className="pt-20 pb-0 px-4 sm:px-6 lg:px-8 bg-gray-900/50 backdrop-blur-sm border-purple-500/20" ref={ref}
     >
       <motion.div
         ref={ref} 
