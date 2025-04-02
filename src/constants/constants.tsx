@@ -13,3 +13,9 @@ export const TOTAL_SUPPLY = 100_000_000 // 100 MILLION SUPPLY
 export const PRESALE_TOKEN_ALLOCATION = 15_000_000 // 15 MILLION PRESALE ALLOCATION
 export const MINIMUM_BUY = 10
 export const MAXIMUM_BUY = 2000
+
+
+// HERO COMPONENT
+export const HERO_SUBTITLE = "A high-speed, community-driven meme token with staking rewards and an auto-burn mechanism on the Solana blockchain."
+export const JOIN_PRESALE = "Join Presale"
+export const VIEW_WHITE_PAPER = "View Whitepaper"

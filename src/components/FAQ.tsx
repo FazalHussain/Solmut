@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 
 const faqs = [
@@ -20,11 +20,11 @@ const faqs = [
   },
   {
     question: 'When does the presale end?',
-    answer: 'The presale is scheduled to end on June 1st, 2025, or when the hard cap is reached. Early participants get the best price and bonus rewards.'
+    answer: 'The presale is scheduled to end on December 1st, 2025, or when the hard cap is reached. Early participants get the best price and bonus rewards.'
   },
   {
     question: 'Is there a vesting period for presale tokens?',
-    answer: 'Presale tokens are unlocked and distributed immediately after the presale ends. However, team and development tokens are subject to a vesting schedule to ensure long-term project stability.'
+    answer: 'Presale tokens are unlocked and distributed immediately after the presale purchase. However, team and development tokens are subject to a vesting schedule to ensure long-term project stability.'
   }
 ];
 

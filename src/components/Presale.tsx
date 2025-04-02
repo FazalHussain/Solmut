@@ -3,9 +3,10 @@ import { Wallet, Timer } from 'lucide-react';
 import Countdown from 'react-countdown';
 import { motion, AnimatePresence } from "framer-motion";
 
-import { useConnectWallet } from "../hook/connectWallet"; // Import the hook
+import { useSharedState } from '../hook/SharedContext'; // Adjust path as needed
 import { usePresaleProgress } from "../hook/presaleProvider"; // Import the hook
 import { MAXIMUM_BUY, MINIMUM_BUY, PRESALE_TOKEN_ALLOCATION } from '../constants/constants';
+import BuyNowButton from './BuyNowButton';
 
 
 const Presale = () => {
@@ -18,8 +19,16 @@ const Presale = () => {
   const presaleEndDate = new Date('2025-06-01T00:00:00');
   const { currentTier } = usePresaleProgress();
   const tokenPrice = currentTier?.price;
+  const { phantom } = useSharedState();
 
-  const { connect, disconnect, connected, publicKey } = useConnectWallet();
+  const handleWalletAction = () => {
+    if (phantom.walletAddress) {
+      phantom.disconnectWallet();
+    } else {
+      phantom.connectWallet();
+    }
+  }
+
 
   // Rotate button text every few seconds to create urgency
   useEffect(() => {
@@ -44,12 +53,6 @@ const Presale = () => {
     return parseFloat(usdAmount) / tokenPrice;
   };
 
-  useEffect(() => {
-    if (connected && publicKey) {
-      console.log("Connected Wallet Address:", publicKey.toBase58());
-    }
-  });
-
   const renderer = ({ days, hours, minutes, seconds, completed }: any) => {
     if (completed) {
       return <span className="text-red-500">Presale Ended!</span>;
@@ -73,7 +76,7 @@ const Presale = () => {
   };
 
   return (
-    <section id="presale" className="pt-20 pb-0 bg-gray-900/50 backdrop-blur-sm border-t border-b border-purple-500/20">
+    <section id="presale" className="pt-0 pb-0 bg-gray-900/50 backdrop-blur-sm border-purple-500/20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-3xl font-bold sm:text-4xl gradient-text glow">Presale Now Live!</h2>
@@ -133,16 +136,23 @@ const Presale = () => {
                 </span>
               </div>
 
-              <button
-                className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 text-white font-bold py-3 px-6 rounded-lg flex items-center justify-center space-x-2 transition-all duration-200 neon-border"
+              {/* <button
+                className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:scale-105 transition-transform duration-200 ease-in-out w-full text-white font-bold py-3 px-6 rounded-lg flex items-center justify-center space-x-2 transition-all duration-200 neon-border"
                 onClick={() => {
-                  connect();
+                  handleWalletAction();
                   setShowLimitedTag(false); // Hide tag after clicking
                 }}
               >
                 <Wallet size={20} />
-                <span>{connected ? ctaText : "Connect Wallet to Buy"}</span>
-              </button>
+                <span>{phantom.walletAddress ? ctaText : "Connect Wallet to Buy"}</span>
+              </button> */}
+
+              <BuyNowButton
+                handleWalletAction={handleWalletAction}
+                ctaText={ctaText}
+                phantom={phantom}
+                setShowLimitedTag={() => setShowLimitedTag(false)}
+              />
 
               {/* Limited time tag */}
               {showLimitedTag && (
@@ -161,7 +171,7 @@ const Presale = () => {
                     animate={{ opacity: 1, y: -10 }} // Fully visible in place
                     exit={{ opacity: 0, y: -50 }} // Moves up and fades out
                     transition={{ duration: 2, ease: "easeOut" }} // Slow fade & move
-                    className="absolute left-0 text-white text-xs font-semibold drop-shadow-md"
+                    className="absolute left-8 text-white text-xs font-semibold drop-shadow-md"
                   >
                     🎉 {recentBuyers} people just bought $SLMT! 🚀
                   </motion.p>

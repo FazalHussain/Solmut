@@ -1,34 +1,19 @@
 import React, { useState } from 'react';
 import { Menu, X, MessageSquare, Twitter, Send } from 'lucide-react';
-import { useConnectWallet } from "../hook/connectWallet"; // Import the hook
+import { useSharedState } from '../hook/SharedContext'; // Adjust path as needed
 import { TELEGRAM_URL, TWITTER_URL, WHITEPAPER_URL } from '../constants/constants';
 
-import { usePhantom } from '../hook/usePhantom';
+
 import { WalletButton } from '../components/WalletButton';
 
 const Navbar = () => {
 
-  const {
-    walletAddress,
-    connecting,
-    isPhantomInstalled,
-    connectWallet,
-    disconnectWallet
-  } = usePhantom();
-
-  const handleWalletAction = () => {
-    if (walletAddress) {
-      disconnectWallet();
-    } else {
-      connectWallet();
-    }
-  }
+  const { phantom } = useSharedState();
 
 
   const [isOpen, setIsOpen] = useState(false);
 
   const menuItems = ['Home', 'About', 'Tokenomics', 'Presale', 'Staking', 'FAQ', 'Whitepaper'];
-  const { connect, disconnect, connected, publicKey } = useConnectWallet();
 
   return (
     <nav className="fixed w-full bg-gray-900/90 backdrop-blur-sm z-50 border-b border-purple-500/20">
@@ -46,7 +31,7 @@ const Navbar = () => {
                 <a
                   key={item}
                   href={item === 'Whitepaper' ? WHITEPAPER_URL : `#${item.toLowerCase()}`}
-                target={item === 'Whitepaper' ? "_blank" : "_self"}  // Open whitepaper in a new tab
+                  target={item === 'Whitepaper' ? "_blank" : "_self"}  // Open whitepaper in a new tab
                   className="text-gray-300 hover:text-purple-400 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200"
                 >
                   {item}
@@ -54,20 +39,19 @@ const Navbar = () => {
               ))}
 
               <div className="flex space-x-2 ml-4">
-                <a href="https://t.me/solmutOfficial" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-purple-400 transition-colors duration-200">
+                <a href={TELEGRAM_URL} target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-purple-400 transition-colors duration-200">
                   <Send size={20} />
                 </a>
-                <a href="https://twitter.com/solmutOfficial" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-purple-400 transition-colors duration-200">
+                <a href={TWITTER_URL} target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-purple-400 transition-colors duration-200">
                   <Twitter size={20} />
                 </a>
               </div>
 
               <WalletButton
-              onClick={handleWalletAction}
-              isConnected={!!walletAddress}
-              isConnecting={connecting}
-              address={walletAddress}
-            />
+                onClick={!!phantom.walletAddress ? phantom.disconnectWallet : phantom.connectWallet}
+                isConnected={!!phantom.walletAddress}
+                isConnecting={phantom.connecting}
+                address={phantom.walletAddress}/>
             </div>
           </div>
 
@@ -97,12 +81,12 @@ const Navbar = () => {
                 {item}
               </a>
             ))}
-            <button
-              onClick={connected ? disconnect : connect}
-              className="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-lg"
-            >
-              {connected ? `Disconnect (${publicKey?.toBase58().slice(0, 4)}...${publicKey?.toBase58().slice(-4)})` : "Connect Wallet"}
-            </button>
+            <WalletButton
+                onClick={handleWalletAction}
+                isConnected={!!walletAddress}
+                isConnecting={connecting}
+                address={walletAddress}/>
+            
             <div className="flex space-x-4 px-3 py-2">
               <a href={TELEGRAM_URL} target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-purple-400 transition-colors duration-200">
                 <Send size={20} />

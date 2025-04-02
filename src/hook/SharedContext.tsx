@@ -1,25 +1,35 @@
 // SharedContext.tsx
-
 import { createContext, useContext, useState, ReactNode } from 'react';
+import { usePhantom } from './usePhantom'; // Import the usePhantom hook
 
 // Define the context type
 interface SharedContextType {
-  currentTier: any; // Define the correct type for your tier (e.g., { tier: number, price: number, target: number })
-  setCurrentTier: (tier: any) => void;
+  phantom: {
+    walletAddress: string | null;
+    connecting: boolean;
+    isPhantomInstalled: boolean;
+    connectWallet: () => void;
+    disconnectWallet: () => void;
+  };
 }
 
 // Create context with default values
 const SharedContext = createContext<SharedContextType>({
-  currentTier: null,
-  setCurrentTier: () => {},
+  phantom: {
+    walletAddress: null,
+    connecting: false,
+    isPhantomInstalled: false,
+    connectWallet: () => {},
+    disconnectWallet: () => {},
+  },
 });
 
 // SharedProvider component to wrap around your app
 export const SharedProvider = ({ children }: { children: ReactNode }) => {
-  const [currentTier, setCurrentTier] = useState<any>(null);
+  const phantom = usePhantom(); // Use the usePhantom hook to manage wallet state
 
   return (
-    <SharedContext.Provider value={{ currentTier, setCurrentTier }}>
+    <SharedContext.Provider value={{ phantom }}>
       {children}
     </SharedContext.Provider>
   );

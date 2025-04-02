@@ -1,15 +1,11 @@
 import { useState, useRef } from 'react';
 import { Calculator, TrendingUp, Lock, Coins } from 'lucide-react';
 import { motion, useInView } from "framer-motion";
-import { useConnectWallet } from "../hook/connectWallet"; // Import the hook
 
 
 const Staking = () => {
   const ref = useRef(null);
   const isFullyInView = useInView(ref, { once: true, amount: 0.3 });
-
-  // Use the custom hook for wallet logic
-  const { connect, connected } = useConnectWallet();
 
   const [stakeAmount, setStakeAmount] = useState<string>('1000');
   const [stakingPeriod, setStakingPeriod] = useState<string>('30');
@@ -91,10 +87,10 @@ const Staking = () => {
               </div>
 
               <button className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 text-white font-bold py-3 px-6 rounded-lg flex items-center justify-center space-x-2 transform hover:scale-105 transition-all duration-200 neon-border"
-                onClick={connected ? () => { } : connect}
-                disabled={connected}>
+                
+                disabled={true}>
                 <Lock size={20} />
-                <span>{connected ? "Your Staking Journey Begins Soon!" : "Connect Wallet to Stake"}</span>
+                <span>Your Staking Journey Begins Soon!</span>
               </button>
             </div>
           </motion.div>
