@@ -22,7 +22,7 @@ const Chart = () => {
         <div className="bg-gray-800/50 rounded-xl overflow-hidden border border-purple-500/20 shadow-lg">
           <div
             ref={ref}
-            className="relative w-full"
+            className="relative w-full pt-8"
             style={{ paddingBottom: '70%', minHeight: '400px' }}
           >
             {/* Only render iframe if it's in view */}

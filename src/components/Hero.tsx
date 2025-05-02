@@ -17,22 +17,13 @@ const Hero = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
         >
-          <div className="relative w-64 h-64 md:w-80 md:h-80">
+          <div className="relative w-124 h-124 md:w-80 md:h-80">
             <img
               src="images/hero2.png"
               alt="Solmut Mascot"
               className="w-full h-full object-contain transform hover:scale-105 transition-all duration-300"
-              style={{
-                filter: 'drop-shadow(0 0 20px rgba(147, 51, 234, 0.3))',
-              }}
             />
-            <div className="absolute -top-2 -right-2 w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center border-2 border-white">
-              <img
-                src="images/solana.png"
-                alt="Solana Logo"
-                className="w-8 h-8"
-              />
-            </div>
+            
           </div>
         </motion.div>
 
