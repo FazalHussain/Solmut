@@ -91,7 +91,7 @@ const Footer = () => {
         </div>
 
         {/* Listing Platforms */}
-        <div className="flex flex-wrap justify-center gap-6 sm:gap-12 mb-4">
+        <div className="hidden flex flex-wrap justify-center gap-6 sm:gap-12 mb-4">
           {listingLinks.map((link) => (
             <a
               key={link.name}

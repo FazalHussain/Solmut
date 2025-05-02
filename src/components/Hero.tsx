@@ -26,13 +26,7 @@ const Hero = () => {
                 filter: 'drop-shadow(0 0 20px rgba(147, 51, 234, 0.3))',
               }}
             />
-            <div className="absolute -top-2 -right-2 w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center border-2 border-white">
-              <img
-                src="images/solana.png"
-                alt="Solana Logo"
-                className="w-8 h-8"
-              />
-            </div>
+            
           </div>
         </motion.div>
 
