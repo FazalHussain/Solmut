@@ -2,29 +2,30 @@ import { useState } from 'react';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 
 const faqs = [
+  // Existing FAQs
   {
     question: 'What is Solmut ($SLMT)?',
-    answer: 'Solmut is a community-driven meme token built on the Solana blockchain, featuring high-speed transactions, low fees, and innovative tokenomics including an auto-burn mechanism and staking rewards.'
+    answer: 'Solmut is a community-driven meme token created on Pump.fun, a platform that allows users to launch memecoins on the Solana blockchain. The platform offers a unique bonding curve mechanism to determine token prices based on supply and demand, ensuring fair access for all participants. '
   },
   {
-    question: 'How does the auto-burn mechanism work?',
-    answer: 'The auto-burn mechanism automatically burns a percentage of tokens from each transaction, reducing the total supply over time and potentially increasing the value of remaining tokens. This creates a deflationary effect on the token supply.'
+    question: 'How does the bonding curve mechanism work on Pump.fun?',
+    answer: 'Pump.fun utilizes a bonding curve model where token prices increase predictably as more tokens are purchased. This mechanism ensures liquidity and fair access, preventing pre-sale advantages often seen in other crypto projects. As demand grows, the price per token rises according to a fixed mathematical formula. '
   },
   {
-    question: 'What are the staking rewards?',
-    answer: 'Stakers can earn up to 40% APY through our staking program. The base APY is 25%, with additional bonus rewards up to 15% for longer staking periods. Rewards are automatically compounded for maximum returns.'
+    question: 'What are the fees associated with using Pump.fun?',
+    answer: "Pump.fun charges a 1% fee on all trades conducted on the platform. Additionally, when a token 'graduates' from Pump.fun to Raydium—a decentralized exchange on Solana—there is a fixed fee of 6 SOL. This fee covers network costs and Raydium's fees, and it is deducted from the token's liquidity pool. "
   },
   {
-    question: 'How can I buy $SLMT?',
-    answer: 'During the presale phase, you can purchase $SLMT directly through our website by connecting your Solana wallet. After the presale ends, $SLMT will be available on major Solana DEXes.'
+    question: 'How does the token graduation process work?',
+    answer: "Once a token reaches a market capitalization of approximately $69,000, it 'graduates' from Pump.fun to Raydium. At this stage, $12,000 worth of the token's liquidity is deposited into Raydium, and the corresponding liquidity provider (LP) tokens are burned, effectively locking the liquidity and enhancing market stability. "
   },
   {
-    question: 'When does the presale end?',
-    answer: 'The presale is scheduled to end on December 1st, 2025, or when the hard cap is reached. Early participants get the best price and bonus rewards.'
+    question: 'What recent changes has Pump.fun implemented?',
+    answer: 'In March 2025, Pump.fun introduced PumpSwap, a native decentralized exchange (DEX) that facilitates seamless token migration. This development allows tokens to transition from their bonding curve phase to open-market trading instantly and without migration fees, enhancing liquidity and trading opportunities for token creators and investors. '
   },
   {
-    question: 'Is there a vesting period for presale tokens?',
-    answer: 'Presale tokens are unlocked and distributed immediately after the presale purchase. However, team and development tokens are subject to a vesting schedule to ensure long-term project stability.'
+    question: 'How does PumpSwap benefit token creators?',
+    answer: 'PumpSwap offers token creators a streamlined migration process, eliminating previous migration fees and delays. This native DEX ensures tokens maintain momentum as they move from the bonding curve model to open-market trading, providing immediate liquidity and potential revenue-sharing opportunities in the future. '
   }
 ];
 
@@ -32,7 +33,7 @@ const FAQ = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
-    <section id="faq" className="pt-20 pb-0 bg-gray-900/50 backdrop-blur-sm border-t border-purple-500/20">
+    <section id="faq" className="pt-20 pb-0 bg-gray-900/50 backdrop-blur-sm border-purple-500/20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-3xl font-bold sm:text-4xl gradient-text glow">Frequently Asked Questions</h2>

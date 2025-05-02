@@ -11,7 +11,7 @@ const Staking = () => {
   const [stakingPeriod, setStakingPeriod] = useState<string>('30');
 
   const calculateRewards = (amount: string, days: string): number => {
-    const baseAPY = 25; // 25% base APY
+    const baseAPY = 15; // 25% base APY
     const bonusAPY = Math.min(parseInt(days) / 30 * 5, 15); // Additional 5% per month, max 15%
     const totalAPY = baseAPY + bonusAPY;
     return (parseFloat(amount) * totalAPY / 100) * (parseInt(days) / 365);
@@ -67,10 +67,11 @@ const Staking = () => {
                   onChange={(e) => setStakingPeriod(e.target.value)}
                   className="w-full bg-gray-900/50 border border-purple-500/20 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-purple-500"
                 >
+
+                  <option value="7">7 Days</option>
                   <option value="30">30 Days</option>
                   <option value="90">90 Days</option>
                   <option value="180">180 Days</option>
-                  <option value="365">365 Days</option>
                 </select>
               </div>
 
@@ -82,7 +83,7 @@ const Staking = () => {
                   </span>
                 </div>
                 <div className="text-sm text-gray-400">
-                  Base APY: 25% + Bonus APY up to 15% for longer staking periods
+                  Base APY: 15% + Bonus APY up to 15% for longer staking periods
                 </div>
               </div>
 
