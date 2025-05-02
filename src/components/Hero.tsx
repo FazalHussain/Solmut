@@ -1,7 +1,8 @@
 
 import { motion } from 'framer-motion';
-import { HERO_SUBTITLE, JOIN_PRESALE, VIEW_WHITE_PAPER, WHITEPAPER_URL } from '../constants/constants';
+import { BUY_NOW, HERO_SUBTITLE, JOIN_PRESALE, PUMP_FUN_URL, VIEW_WHITE_PAPER, WHITEPAPER_URL } from '../constants/constants';
 import { Download, Rocket } from 'lucide-react';
+
 
 const Hero = () => {
   return (
@@ -18,7 +19,7 @@ const Hero = () => {
         >
           <div className="relative w-64 h-64 md:w-80 md:h-80">
             <img
-              src="images/solmut_hero.png"
+              src="images/hero2.png"
               alt="Solmut Mascot"
               className="w-full h-full object-contain transform hover:scale-105 transition-all duration-300"
               style={{
@@ -27,7 +28,7 @@ const Hero = () => {
             />
             <div className="absolute -top-2 -right-2 w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center border-2 border-white">
               <img
-                src="https://cryptologos.cc/logos/solana-sol-logo.png"
+                src="images/solana.png"
                 alt="Solana Logo"
                 className="w-8 h-8"
               />
@@ -65,11 +66,12 @@ const Hero = () => {
           transition={{ duration: 1, delay: 0.9 }}
         >
           <a
-            href="#presale"
+            href={PUMP_FUN_URL}
+            target='_blank'
             className="inline-flex items-center px-8 py-4 border border-transparent text-lg font-medium rounded-lg text-white bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 transform hover:scale-105 transition-all duration-200 neon-border"
           >
             <Rocket className="mr-2" size={20} />
-            {JOIN_PRESALE}
+            {BUY_NOW}
           </a>
           <a
             href={WHITEPAPER_URL}

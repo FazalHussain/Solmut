@@ -9,6 +9,10 @@ import Footer from './components/Footer';
 import ZKCompression from './components/ZKCompression';
 import RaisedTracker from './components/RaisedTracker';
 import { SharedProvider } from './hook/SharedContext';
+import TokenStats from './components/TokenStats';
+import StakingManual from './components/StakingManual';
+import ContractAddress from './components/ContractAddress';
+import Chart from './components/Chart';
 
 const App = () => {
 
@@ -19,11 +23,15 @@ const App = () => {
         <main>
           <Hero />
           <About />
+          <ContractAddress />
           <Tokenomics />
-          <Presale />
+          <Chart />
+          <TokenStats />
+          <StakingManual />
+          {/* <Presale />
           <RaisedTracker />
           <Staking />
-          <ZKCompression />
+          <ZKCompression /> */}
           <FAQ />
           <Footer />
         </main>

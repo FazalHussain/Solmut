@@ -1,19 +1,19 @@
 import React, { useState } from 'react';
 import { Menu, X, MessageSquare, Twitter, Send } from 'lucide-react';
-import { useSharedState } from '../hook/SharedContext'; // Adjust path as needed
+//import { useSharedState } from '../hook/SharedContext'; // Adjust path as needed
 import { TELEGRAM_URL, TWITTER_URL, WHITEPAPER_URL } from '../constants/constants';
 
 
-import { WalletButton } from '../components/WalletButton';
+//import { WalletButton } from '../components/WalletButton';
 
 const Navbar = () => {
 
-  const { phantom } = useSharedState();
+  //const { phantom } = useSharedState();
 
 
   const [isOpen, setIsOpen] = useState(false);
 
-  const menuItems = ['Home', 'About', 'Tokenomics', 'Presale', 'Staking', 'FAQ', 'Whitepaper'];
+  const menuItems = ['Home', 'About', 'Tokenomics', 'TokenStats', 'Staking', 'FAQ', 'Whitepaper'];
 
   return (
     <nav className="fixed w-full bg-gray-900/90 backdrop-blur-sm z-50 border-b border-purple-500/20">
@@ -47,11 +47,11 @@ const Navbar = () => {
                 </a>
               </div>
 
-              <WalletButton
+              {/* <WalletButton
                 onClick={!!phantom.walletAddress ? phantom.disconnectWallet : phantom.connectWallet}
                 isConnected={!!phantom.walletAddress}
                 isConnecting={phantom.connecting}
-                address={phantom.walletAddress}/>
+                address={phantom.walletAddress}/> */}
             </div>
           </div>
 
@@ -74,19 +74,19 @@ const Navbar = () => {
             {menuItems.map((item) => (
               <a
                 key={item}
-                href={`#${item.toLowerCase()}`}
-                className="text-gray-300 hover:text-purple-400 block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200"
-                onClick={() => setIsOpen(false)}
+                href={item === 'Whitepaper' ? WHITEPAPER_URL : `#${item.toLowerCase()}`}
+                target={item === 'Whitepaper' ? "_blank" : "_self"}  // Open whitepaper in a new tab
+                className="text-gray-300 hover:text-purple-400 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200"
               >
                 {item}
               </a>
             ))}
-            <WalletButton
-                onClick={handleWalletAction}
-                isConnected={!!walletAddress}
-                isConnecting={connecting}
-                address={walletAddress}/>
-            
+            {/* <WalletButton
+                onClick={!!phantom.walletAddress ? phantom.disconnectWallet : phantom.connectWallet}
+                isConnected={!!phantom.walletAddress}
+                isConnecting={phantom.connecting}
+                address={phantom.walletAddress}/> */}
+
             <div className="flex space-x-4 px-3 py-2">
               <a href={TELEGRAM_URL} target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-purple-400 transition-colors duration-200">
                 <Send size={20} />

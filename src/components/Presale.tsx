@@ -9,6 +9,7 @@ import { MAXIMUM_BUY, MINIMUM_BUY, PRESALE_TOKEN_ALLOCATION } from '../constants
 import BuyNowButton from './BuyNowButton';
 
 
+
 const Presale = () => {
 
   const [ctaText, setCtaText] = useState("Buy Now");
@@ -21,9 +22,10 @@ const Presale = () => {
   const tokenPrice = currentTier?.price;
   const { phantom } = useSharedState();
 
-  const handleWalletAction = () => {
+  const handleWalletAction = async() => {
     if (phantom.walletAddress) {
-      phantom.disconnectWallet();
+      //phantom.disconnectWallet();
+      //await interactWithContract()
     } else {
       phantom.connectWallet();
     }

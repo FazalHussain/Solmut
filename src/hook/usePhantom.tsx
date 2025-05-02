@@ -1,8 +1,10 @@
 import { useState, useEffect, useCallback } from 'react';
 
+
 export const usePhantom = () => {
   const [walletAddress, setWalletAddress] = useState<string | null>(null);
   const [connecting, setConnecting] = useState(false);
+
 
   const checkIfPhantomIsInstalled = useCallback(() => {
     const provider = window.phantom?.solana;

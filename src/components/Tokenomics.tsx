@@ -1,16 +1,31 @@
 import React, { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { PieChart, DollarSign, Lock, Users } from 'lucide-react';
+import { PieChart, DollarSign, Lock, Users, Link, BadgeDollarSign } from 'lucide-react';
 import { TOTAL_SUPPLY } from '../constants/constants';
 
+// const tokenomicsData = [
+//   { name: 'Presale', percentage: 15, status: 'Unlocked', color: 'from-purple-500 to-blue-500' },
+//   { name: 'Team/Development', percentage: 20, status: 'Locked', color: 'from-blue-500 to-indigo-500' },
+//   { name: 'Liquidity Pool', percentage: 10, status: 'Unlocked', color: 'from-indigo-500 to-purple-500' },
+//   { name: 'Staking/Rewards', percentage: 10, status: 'Locked', color: 'from-purple-400 to-blue-400' },
+//   { name: 'Marketing', percentage: 5, status: 'Unlocked', color: 'from-blue-400 to-indigo-400' },
+//   { name: 'Reserve', percentage: 25, status: 'Locked', color: 'from-indigo-400 to-purple-400' },
+//   { name: 'Staking Reserve', percentage: 15, status: 'Locked', color: 'from-purple-300 to-blue-300' },
+// ];
+
 const tokenomicsData = [
-  { name: 'Presale', percentage: 15, status: 'Unlocked', color: 'from-purple-500 to-blue-500' },
-  { name: 'Team/Development', percentage: 20, status: 'Locked', color: 'from-blue-500 to-indigo-500' },
-  { name: 'Liquidity Pool', percentage: 10, status: 'Unlocked', color: 'from-indigo-500 to-purple-500' },
-  { name: 'Staking/Rewards', percentage: 10, status: 'Locked', color: 'from-purple-400 to-blue-400' },
-  { name: 'Marketing', percentage: 5, status: 'Unlocked', color: 'from-blue-400 to-indigo-400' },
-  { name: 'Reserve', percentage: 25, status: 'Locked', color: 'from-indigo-400 to-purple-400' },
-  { name: 'Staking Reserve', percentage: 15, status: 'Locked', color: 'from-purple-300 to-blue-300' },
+  { name: 'Liquidity Pool', percentage: 100, status: 'Unlocked', color: 'from-indigo-500 to-purple-500' },
+  { name: 'Bonding Curve Mechanism', percentage: 0, status: 'N/A', color: 'from-green-500 to-blue-500' },
+  { name: 'Liquidity Injection', percentage: 0, status: 'Conditional', color: 'from-blue-500 to-indigo-500' },
+  { name: 'Liquidity Locking', percentage: 0, status: 'Post-Launch', color: 'from-indigo-500 to-purple-500' },
+  { name: 'Transaction Fee', percentage: 1, status: 'Ongoing', color: 'from-red-500 to-yellow-500' },
+];
+
+const features = [
+  { icon: Link, title: "Bonding Curve Mechanism", desc: "Pump.fun employs a bonding curve model to dynamically adjust token prices based on supply and demand, ensuring a fair and transparent pricing mechanism." },
+  { icon: DollarSign, title: "Liquidity Injection", desc: "Upon a token’s market cap reaching $69,000, Pump.fun injects $12,000 worth of liquidity into Raydium, enhancing market stability and liquidity." },
+  { icon: Lock, title: "Liquidity Locking", desc: "After token launch, liquidity provider tokens are burned, effectively locking liquidity to prevent rug pulls and ensure investor confidence." },
+  { icon: BadgeDollarSign, title: "Transaction Fee (1% Ongoing)", desc: "Pump.fun imposes a 1% fee on each transaction to support platform maintenance and ecosystem stability." }
 ];
 
 const Tokenomics = () => {
@@ -78,11 +93,7 @@ const Tokenomics = () => {
           >
             <h3 className="text-2xl font-bold text-purple-300 mb-6">Vesting Schedule</h3>
             <div className="space-y-6">
-              {[
-                { icon: Lock, title: "Unlock Conditions", desc: "Maximum 5% unlock per cycle (every 6 months)" },
-                { icon: DollarSign, title: "Price Requirements", desc: "2× the last unlock price for 30 days" },
-                { icon: Users, title: "Team Flexibility", desc: "Can delay or reduce unlocks but not increase them" }
-              ].map((item, i) => (
+              {features.map((item, i) => (
                 <motion.div
                   key={i}
                   className="flex items-start gap-4"
@@ -90,7 +101,7 @@ const Tokenomics = () => {
                   animate={isFullyInView ? { opacity: 1, x: 0 } : {}}
                   transition={{ duration: 0.5, delay: i * 0.2 }}
                 >
-                  <item.icon className="w-6 h-6 text-purple-400 mt-1" />
+                  <item.icon className="w-8 h-8 text-purple-400 mt-1" />
                   <div>
                     <h4 className="text-lg font-semibold text-gray-200">{item.title}</h4>
                     <p className="text-gray-400">{item.desc}</p>
